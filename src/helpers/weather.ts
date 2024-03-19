@@ -1,11 +1,11 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const getWeatherByCity = (city: string) => {
+const getWeather = (location: string) => {
   return new Promise((resolve, reject) => {
     axios
       .get(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}/next7days?unitGroup=metric&include=days%2Ccurrent&lang=es&key=${process.env.REACT_APP_KEY}&contentType=json`
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}/next7days?unitGroup=metric&include=days%2Ccurrent&lang=es&key=${process.env.REACT_APP_KEY}&contentType=json`
       )
       .then((response) => {
         resolve(response.data);
@@ -17,4 +17,4 @@ const getWeatherByCity = (city: string) => {
   });
 };
 
-export { getWeatherByCity };
+export { getWeather };

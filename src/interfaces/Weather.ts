@@ -9,7 +9,8 @@ export interface TodayWeather {
 
   export interface Forecast {
     date: string;
-    temperature: number;
+    temperatureMax: number;
+    temperatureMin: number;
     description: string;
     icon: string;
   }
