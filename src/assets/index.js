@@ -1,0 +1,9 @@
+export const ClearDay = require('./clear-day.png');
+export const ClearNight = require('./clear-night.png');
+export const Cloudy = require('./cloudy.png');
+export const Fog = require('./fog.png');
+export const PartlyCloudyDay = require('./partly-cloudy-day.png');
+export const PartlyCloudyNight = require('./partly-cloudy-night.png');
+export const Rain = require('./rain.png');
+export const Snow = require('./snow.png');
+export const Wind = require('./wind.png');

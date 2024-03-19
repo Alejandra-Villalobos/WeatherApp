@@ -6,3 +6,10 @@ export interface TodayWeather {
     humidity: number;
     windSpeed: number;
   }
+
+  export interface Forecast {
+    date: string;
+    temperature: number;
+    description: string;
+    icon: string;
+  }
