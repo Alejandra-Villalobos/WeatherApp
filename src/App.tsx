@@ -16,7 +16,7 @@ function App() {
     try {
       await getWeather(location).then((response: any) => {
         setToday({
-          city: response.resolvedAddress,
+          city: response.resolvedAddress === response.address ? response.timezone : response.resolvedAddress,
           sunrise: response.currentConditions.sunrise,
           sunset: response.currentConditions.sunset,
           temperature: response.currentConditions.temp,
@@ -25,7 +25,6 @@ function App() {
           humidity: response.currentConditions.humidity,
           windSpeed: response.currentConditions.windspeed,
         });
-
         const forecastArr: Forecast[] = [];
         for (let i = 1; i <= 6; i++) {
           forecastArr.push({

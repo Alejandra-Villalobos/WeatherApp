@@ -20,7 +20,7 @@ function ForecastCards({ forecast } : Props) {
             />
           </div>
           <p className="font-bold text-xl py-2">
-            {card.temperatureMax.toFixed(0)}°C/{card.temperatureMin.toFixed(0)}°C
+            {card.temperatureMin.toFixed(0)}°C/{card.temperatureMax.toFixed(0)}°C
           </p>
           <p className="italic text-xl">{card.description}</p>
         </div>

@@ -22,8 +22,8 @@ function SearchBar({ setLocation }: Props) {
           onChange={(e) => setValue(e.target.value)}
           className="p-3"
         />
-        <div className="bg-green-500 p-3 rounded-r-md hover:bg-green-600 cursor-pointer">
-          <FaSearch color="white" size={25} onClick={() => handleSearch()} />
+        <div onClick={() => handleSearch()} className="bg-green-500 p-3 rounded-r-md hover:bg-green-600 cursor-pointer">
+          <FaSearch color="white" size={25} />
         </div>
       </Space.Compact>
     </>
