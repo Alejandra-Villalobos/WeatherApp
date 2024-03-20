@@ -1,5 +1,7 @@
 export interface TodayWeather {
     city: string;
+    sunrise: number;
+    sunset: number;
     temperature: number;
     description: string;
     icon: string;

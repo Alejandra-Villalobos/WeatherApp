@@ -12,6 +12,7 @@ const getWeather = (location: string) => {
       })
       .catch((error) => {
         console.log("Error:", error.response.data);
+        toast.error("Ubicación inválida")
         reject(error);
       });
   });
