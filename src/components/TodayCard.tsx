@@ -12,7 +12,7 @@ function TodayCard({
   windSpeed,
 }: TodayWeather) {
   return (
-    <div className="items-center justify-center w-6/12 flex text-xl text-center bg-white rounded-md p-4">
+    <div className="items-center justify-center sm:w-max w-10/12 flex md:flex-row flex-col text-xl text-center bg-white rounded-md p-4">
       <div className="p-3">
         <p className="font-bold text-xl py-2">{city}</p>
         <p className="italic py-2">Hoy</p>
@@ -35,7 +35,7 @@ function TodayCard({
       </div>
       <div className="p-3">
         <p className="italic text-2xl">{description}</p>
-        <div className="flex gap-10 mt-4 justify-center">
+        <div className="flex gap-8 mt-4 justify-center">
           <p>
             Humedad
             <br />

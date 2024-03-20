@@ -16,13 +16,13 @@ function SearchBar({ setLocation }: Props) {
 
   return (
     <>
-      <Space.Compact className="w-8/12 py-4 flex items-center">
+      <Space.Compact className="min:w-8/12 py-4 flex items-center w-10/12">
         <Input
           placeholder="Ingrese el nombre de una ciudad, código postal o coordenadas"
           onChange={(e) => setValue(e.target.value)}
           className="p-3"
         />
-        <div className="bg-green-500 p-3 rounded-r-md">
+        <div className="bg-green-500 p-3 rounded-r-md hover:bg-green-600 cursor-pointer">
           <FaSearch color="white" size={25} onClick={() => handleSearch()} />
         </div>
       </Space.Compact>
