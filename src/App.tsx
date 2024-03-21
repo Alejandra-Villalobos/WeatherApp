@@ -6,17 +6,25 @@ import SearchBar from "./components/SearchBar";
 import ForecastCards from "./components/ForecastCards";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { setBackgroundFunc } from "./utils/setBackground";
 
 function App() {
   const [search, setSearch] = useState<string>("");
   const [today, setToday] = useState<TodayWeather>();
   const [forecast, setForecast] = useState<Forecast[]>([]);
 
+  const [background, setBackground] = useState<string>(
+    "bg-gradient-to-r from-green-400 to-violet-500"
+  );
+
   const handleWeather = async (location: string) => {
     try {
       await getWeather(location).then((response: any) => {
         setToday({
-          city: response.resolvedAddress === response.address ? response.timezone : response.resolvedAddress,
+          city:
+            response.resolvedAddress === response.address
+              ? response.timezone
+              : response.resolvedAddress,
           sunrise: response.currentConditions.sunrise,
           sunset: response.currentConditions.sunset,
           temperature: response.currentConditions.temp,
@@ -28,6 +36,7 @@ function App() {
         const forecastArr: Forecast[] = [];
         for (let i = 1; i <= 6; i++) {
           forecastArr.push({
+            city: response.resolvedAddress,
             date: response.days[i].datetime,
             temperatureMax: response.days[i].tempmax,
             temperatureMin: response.days[i].tempmin,
@@ -36,6 +45,9 @@ function App() {
           });
         }
         setForecast(forecastArr);
+
+        const color = setBackgroundFunc(response.currentConditions.icon);
+        setBackground(color!);
       });
     } catch (error) {
       console.error("Error:", error);
@@ -55,11 +67,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (search !== "") handleWeather(search);
+    if (search !== "") {
+      handleWeather(search);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
   return (
-    <div className="w-screen min-h-screen h-max bg-gradient-to-r from-cyan-500 to-blue-500 flex flex-col items-center">
+    <div
+      className={`w-screen min-h-screen h-max ${background} transition-colors duration-700 ease-in-out flex flex-col items-center`}
+    >
       <ToastContainer />
       <h1 className="text-3xl mt-4">Weather App</h1>
       <SearchBar setLocation={setSearch} />
@@ -79,7 +95,9 @@ function App() {
           <ForecastCards forecast={forecast} />
         </>
       ) : (
-        <p className="text-3xl italic text-gray-700">Realiza una búsqueda o activa los permisos de ubicación</p>
+        <p className="text-3xl italic text-gray-700">
+          Realiza una búsqueda o activa los permisos de ubicación
+        </p>
       )}
     </div>
   );

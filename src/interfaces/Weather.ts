@@ -10,6 +10,7 @@ export interface TodayWeather {
   }
 
   export interface Forecast {
+    city: string;
     date: string;
     temperatureMax: number;
     temperatureMin: number;
