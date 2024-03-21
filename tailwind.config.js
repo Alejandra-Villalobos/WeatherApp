@@ -3,6 +3,10 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      backgroundImage: {
+        "rain-gif"  : "url('/src/assets/rainBg.gif')",
+        "snow-gif"  : "url('/src/assets/snowBg.gif')",
+      },
       animation: {
         fadeBounce: "fadeInBounce .5s ease-in",
         fade: "fadeIn .7s ease-in",

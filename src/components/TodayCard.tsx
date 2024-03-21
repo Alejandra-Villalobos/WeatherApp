@@ -11,8 +11,8 @@ function TodayCard({
   windSpeed,
 }: TodayWeather) {
   return (
-    <div key={city} className="items-center justify-center sm:w-max w-10/12 flex md:flex-row flex-col text-xl text-center bg-white rounded-md p-4 animate-fadeBounce">
-      <div className="p-3 border-b-2 md:border-r-2 md:border-b-0">
+    <div key={city} className="items-center justify-center sm:w-max w-10/12 flex lg:flex-row flex-col text-xl text-center bg-white rounded-md p-4 animate-fadeBounce">
+      <div className="p-3 border-b-2 lg:border-r-2 lg:border-b-0">
         <p className="font-bold text-xl py-2">{city}</p>
         <p className="italic py-2">Hoy</p>
         <div className="flex justify-center items-center">

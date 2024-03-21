@@ -7,24 +7,34 @@ import ForecastCards from "./components/ForecastCards";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { setBackgroundFunc } from "./utils/setBackground";
+import { getLocation } from "./helpers/geolocation";
 
 function App() {
   const [search, setSearch] = useState<string>("");
   const [today, setToday] = useState<TodayWeather>();
   const [forecast, setForecast] = useState<Forecast[]>([]);
 
+  const [locationName, setLocationName] = useState<string>("");
+
   const [background, setBackground] = useState<string>(
-    "bg-gradient-to-r from-green-400 to-violet-500"
+    "bg-gradient-to-tl from-green-400 to-blue-500"
   );
+
+  const handleLocation = async (lat: number, lon: number) => {
+    await getLocation(lat, lon).then((location: any) => {
+      const town = location.address.town ? `${location.address.town}, ` : ' '
+      const state = location.address.state ? `${location.address.state}, ` : ' '
+      const country = location.address.country ? `${location.address.country}` : ' '
+      setLocationName(`${town}${state}${country}`)
+    })
+  }
 
   const handleWeather = async (location: string) => {
     try {
       await getWeather(location).then((response: any) => {
+        handleLocation(response.latitude, response.longitude)
         setToday({
-          city:
-            response.resolvedAddress === response.address
-              ? response.timezone
-              : response.resolvedAddress,
+          city: response.resolvedAddress,
           sunrise: response.currentConditions.sunrise,
           sunset: response.currentConditions.sunset,
           temperature: response.currentConditions.temp,
@@ -77,12 +87,12 @@ function App() {
       className={`w-screen min-h-screen h-max ${background} transition-colors duration-700 ease-in-out flex flex-col items-center`}
     >
       <ToastContainer />
-      <h1 className="text-3xl mt-4">Weather App</h1>
+      <h1 className="text-3xl mt-4 text-white">Aplicación de Clima</h1>
       <SearchBar setLocation={setSearch} />
       {today && forecast ? (
         <>
           <TodayCard
-            city={today.city}
+            city={locationName}
             sunrise={today.sunrise}
             sunset={today.sunset}
             temperature={today.temperature}
@@ -91,7 +101,7 @@ function App() {
             humidity={today.humidity}
             windSpeed={today.windSpeed}
           />
-          <p className="p-4 text-xl">Pronóstico próximos 6 días</p>
+          <p className="p-4 text-xl text-white">Pronóstico próximos 6 días</p>
           <ForecastCards forecast={forecast} />
         </>
       ) : (
